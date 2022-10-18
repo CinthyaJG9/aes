@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cifrar-AES</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <div class="header">
+        <h1>Cifrado en AES</h1>
+    </div>
+    <hr>
+    <div class="main-container">
+        <form id="form-cifrar">
+            <label>Ingresa el tamaño del cifrado</label>
+            <br>
+            <div id="select-container">
+                <select id ="condicion" required><option  value="">Seleccione </option>
+                    <option  value="128" id="128">128</option>
+                    <option  value="192" id="192">192</option>
+                    <option  value="256" id="256">256</option>
+                </select>
+            </div>
+            <label>
+                Clave
+            </label>
+            <br>
+            <input class="text-input" type="text" id="clave" name="clave">
+            <br>
+            <label>Mensaje</label>
+            <br>
+            <input type="text" name="mensaje" id="mensaje">
+            <br>
+            <br>
+            <input type="button" class="btn" onclick="cifrado()" value="Cifrar">
+            <input type="submit" class="btn" value="Enviar">
+        </form>
+        <br>
+        <br>
+        <div class="output-container">
+            <h2>El mensaje cifrado es:</h2>
+            <p id="cifrado-output"></p>
+        </div>
+        <div id="descifrar">
+            <p id="texto-cifrado"></p>
+        </div>
+        <input type="button" class="btn" onclick="saveTextAsFile()" value="Mandar mensaje cifrado" id="send"> 
+    </div>
+    
+    <hr>
+    <div class="footer">
+    </div>
+    <script src="socket.io/socket.io.js"></script>
+    <script src="js/aes.js"></script>
+    <script>
+        var socket = io();
+        var form = document.getElementById("form-cifrar");
+        
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+</body>
+</html>
