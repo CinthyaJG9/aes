@@ -44,22 +44,31 @@
             <h2>El mensaje cifrado es:</h2>
             <p id="cifrado-output"></p>
         </div>
-        <div id="descifrar">
-            <p id="texto-cifrado"></p>
+        <hr>
+        <div id="mostrar-cifrado" class="section">
+            <div id="texto-cifrado"></div>
+            <input type="button" onclick="saveTextAsFile()" value="Descargar el archivo .txt'">
         </div>
-        <input type="button" class="btn" onclick="saveTextAsFile()" value="Mandar mensaje cifrado" id="send"> 
-    </div>
-    
+        <div id="descifrador" class="section">
+            <p>
+                Ingrese el archivo a descifrar
+            </p>
+            <input type = "file" id = "archivoDescifrar" onchange="return Validar()">
+          <br>
+          <br>
+          <input class = "action" type = "button" value = "descifrar" onclick = "descifrado()">
+          <div id="texto-descifrado"></div>
+          <br>
+          <br>
+          <br>
+        </div>
+       
+    </div> 
     <hr>
     <div class="footer">
     </div>
     <script src="socket.io/socket.io.js"></script>
     <script src="js/aes.js"></script>
-    <script>
-        var socket = io();
-        var form = document.getElementById("form-cifrar");
-        
-    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
 </body>

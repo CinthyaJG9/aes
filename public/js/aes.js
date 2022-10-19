@@ -3,24 +3,28 @@ var form = document.getElementById("form-cifrar")
 var key = document.getElementById('clave').value;
 var entradaCifrado = document.getElementById('descifrar');
 
+
+
 form.addEventListener('submit', function (e){
-    e.preventDefault();
-    socket.emit('key', key);
     var cifrado = document.getElementById("cifrado-output").innerHTML;
-    socket.emit('mensaje cifrado', cifrado);
+    var key = document.getElementById('clave').value;
+    var datos = {
+          key: key,
+          textoCifrado: cifrado
+        };
+    e.preventDefault();
+    
+    socket.emit("datos", datos);
     document.getElementById('clave').value = "";
     document.getElementById('mensaje').value = "";
 });
 
-let keyRecibida = "";
-socket.on('key', key=>{
-    keyRecibida = key;
-    console.log(key);
+
+socket.on('datos', datos=>{
+    console.log("llegó", datos )
+    var key = datos['key'];
+    document.getElementById('texto-cifrado').innerHTML = datos['textoCifrado'];
     
-    socket.on('mensaje cifrado', cifrado=>{
-        entradaCifrado.innerHTML = cifrado;
-        console.log("se recibio el mensaje");
-    });
 });
 
 
@@ -74,7 +78,7 @@ function cifrado(){
 function saveTextAsFile()
 {      
 // grab the content of the form field and place it into a variable
-    var textToWrite = document.getElementById("cifrado-output").innerHTML;
+    var textToWrite = document.getElementById("texto-cifrado").innerHTML;
 //  create a new Blob (html5 magic) that conatins the data from your form feild
     var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
 // Specify the name of the file to be saved
@@ -118,18 +122,18 @@ function destroyClickedElement(event)
     document.body.removeChild(event.target);
 }
 
-function descifrado(){
-    var password = document.getElementById('clave').value;
-    var descifrado = CryptoJS.AES.decrypt(cifrado, password);
-    document.getElementById("demo03").innerHTML= descifrado.toString(CryptoJS.enc.Utf8);
+function descifrado(key, cifrado){
+     
+    var descifrado = CryptoJS.AES.decrypt(cifrado, key);
+    document.getElementById("texto-descifrado").innerHTML= descifrado.toString(CryptoJS.enc.Utf8);
 }
 
 async function subirArchivoDescifrar(file){
 
     var txt = await file.text();
-    document.getElementById('leeArchivoDescifrar').textContent = txt;
+    descifrado(key, txt)
 
-}
+} 
 
 // Vvalidamos
 const Validar = () =>{
