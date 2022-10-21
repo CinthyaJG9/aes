@@ -45,9 +45,10 @@
             <p id="cifrado-output"></p>
         </div>
         <hr>
-        <div id="mostrar-cifrado" class="section">
+        <div class="output-container">
             <div id="texto-cifrado"></div>
-            <input type="button" onclick="saveTextAsFile()" value="Descargar el archivo .txt'">
+            <div style="visibility: hidden" id="texto-clave"></div>
+            <input class="btn" type="button" onclick="saveTextAsFile()" value="Descargar el archivo .txt'">
         </div>
         <div id="descifrador" class="section">
             <p>
@@ -56,8 +57,8 @@
             <input type = "file" id = "archivoDescifrar" onchange="return Validar()">
           <br>
           <br>
-          <input class = "action" type = "button" value = "descifrar" onclick = "descifrado()">
-          <div id="texto-descifrado"></div>
+          <input class = "btn" type = "button" value = "Descifrar" onclick = "descifrado()">
+          <div class="output-container" id="texto-descifrado"></div>
           <br>
           <br>
           <br>
@@ -66,6 +67,13 @@
     </div> 
     <hr>
     <div class="footer">
+        <p>
+            Guzmán Gutiérrez Alan Joseph
+            <br>
+            Jiménez García Cinthya Fernanda
+            <br>
+            Grupo 5IV7
+        </p>
     </div>
     <script src="socket.io/socket.io.js"></script>
     <script src="js/aes.js"></script>

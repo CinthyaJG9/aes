@@ -24,7 +24,7 @@ socket.on('datos', datos=>{
     console.log("llegó", datos )
     var key = datos['key'];
     document.getElementById('texto-cifrado').innerHTML = datos['textoCifrado'];
-    
+    document.getElementById('texto-clave').innerHTML = datos['key'];   
 });
 
 
@@ -122,18 +122,38 @@ function destroyClickedElement(event)
     document.body.removeChild(event.target);
 }
 
-function descifrado(key, cifrado){
-     
-    var descifrado = CryptoJS.AES.decrypt(cifrado, key);
-    document.getElementById("texto-descifrado").innerHTML= descifrado.toString(CryptoJS.enc.Utf8);
+function descifrado(){
+    var archivo = document.getElementById('archivoDescifrar')
+    var contenidoArchivo = archivo.value;
+
+    if(contenidoArchivo){
+        var reader = new FileReader();
+        reader.onload = function(event){
+            var txt = event.target.result;
+            var descifrado = CryptoJS.AES.decrypt(txt, document.getElementById('texto-clave').innerHTML);
+            document.getElementById("texto-descifrado").innerHTML= descifrado.toString(CryptoJS.enc.Utf8);
+        }
+        reader.readAsText(archivo.files[0]);
+        
+            
+    }
+    
+
+    
 }
 
-async function subirArchivoDescifrar(file){
+function readFile(file) {
+    const reader = new FileReader();
+    reader.addEventListener('load', (event) => {
+      const result = event.target.result;
+      // Do something with result
+    });
+/*async function subirArchivoDescifrar(file){
 
     var txt = await file.text();
     descifrado(key, txt)
 
-} 
+}*/ 
 
 // Vvalidamos
 const Validar = () =>{
@@ -149,7 +169,7 @@ const Validar = () =>{
         return false;
 
     }
-    else{
+    /*else{
 
         if(archivoEscogido.files && archivoEscogido.files[0]){
 
@@ -165,4 +185,6 @@ const Validar = () =>{
 
         }
 
-    }}
+    }*/
+}
+}

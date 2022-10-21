@@ -20,6 +20,7 @@
     text-decoration-color: blueviolet;
     border-radius: 15px;
     padding-inline: 1rem;
+    padding: 3px;
 }
 
 .btn:hover{
@@ -33,8 +34,21 @@
 
 .output-container{
     margin: 1rem;
+    border: 2px, rgb(24, 83, 83);
+
 }
 
 .footer{
     margin: 2rem;
+    background-color: navajowhite;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: medium;
+
+}
+
+.select-container{
+
+    background-color: navy;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+
 }
